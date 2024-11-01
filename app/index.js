@@ -267,3 +267,46 @@ async function fetchText (operation, a, b) {
     let response = await fetch(`${apiUrl}/${operation}?a=${a}&b=${b}`);
     return await response.text();
 }
+
+document.addEventListener('keydown', async function (event) {
+    switch (event.key) {
+        case 'Enter':
+        case '=':
+            await equals();
+            break;
+        case '+':
+            await primitiveOperation('add');
+            break;
+        case '-':
+            await primitiveOperation('subtract');
+            break;
+        case '*':
+            await primitiveOperation('times');
+            break;
+        case '/':
+            await primitiveOperation('divide');
+            break;
+        case 'Backspace':
+            backspace();
+            break;
+        case 'Escape':
+        case 'Delete':
+            reset();
+            break;
+        case '.':
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            appendToDisplay(event.key);
+            break;
+        default:
+            console.log(`${event.key} pressed`);
+    }
+});
